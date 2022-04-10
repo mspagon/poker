@@ -1,11 +1,9 @@
 import enum
 import getch
-import random
 import os
+import random
 
 from collections import namedtuple
-from os import system, name
-from typing import List
 
 import layouts
 
@@ -35,12 +33,12 @@ payoutx = {
 # clears the terminal window
 def clear():
     # for windows
-    if name == 'nt':
-        _ = system('cls')
+    if os.name == 'nt':
+        _ = os.system('cls')
 
     # for mac and linux(here, os.name is 'posix')
     else:
-        _ = system('clear')
+        _ = os.system('clear')
 
 
 class Player:
