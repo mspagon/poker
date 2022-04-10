@@ -11,7 +11,7 @@ buttons = {
     ]
 }
 
-card_display = {
+cards = {
     ('hearts', 'A'): [
         r'╭─────────╮',
         r'│ A       │',
@@ -494,28 +494,3 @@ card_display = {
         r'╰─────────╯',
     ]
 }
-
-
-def main():
-    cards = ['ace', 'two', 'three', 'four', 'five']
-
-    hold = [False, False, False, False, False]
-
-    while True:
-        print(hold)
-
-        key_press = input()
-        if key_press == '1':
-            hold[0] = not (hold[0])
-        if key_press == '2':
-            hold[1] = not (hold[1])
-        if key_press == '3':
-            hold[2] = not (hold[2])
-        if key_press == '4':
-            hold[3] = not (hold[3])
-        if key_press == '5':
-            hold[4] = not (hold[4])
-
-
-if __name__ == '__main__':
-    main()

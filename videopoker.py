@@ -1,36 +1,17 @@
 import enum
+import getch
+import random
 import os
 
+from collections import namedtuple
+from os import system, name
 from typing import List
 
-import cards
-
-import getch
-
-from collections import namedtuple
-
-import random
+import layouts
 
 
 class DeckError(Exception): pass
 
-
-# import only system from os
-from os import system, name
-
-# import sleep to show output for some time period
-from time import sleep
-
-
-# define our clear function
-def clear():
-    # for windows
-    if name == 'nt':
-        _ = system('cls')
-
-    # for mac and linux(here, os.name is 'posix')
-    else:
-        _ = system('clear')
 
 TERMINAL_X, TERMINAL_Y = os.get_terminal_size()
 
@@ -49,6 +30,17 @@ payoutx = {
     "Two Pair": [2, 4, 6, 8, 10],
     "Jacks or Better": [1, 2, 3, 4, 5],
 }
+
+
+# clears the terminal window
+def clear():
+    # for windows
+    if name == 'nt':
+        _ = system('cls')
+
+    # for mac and linux(here, os.name is 'posix')
+    else:
+        _ = system('clear')
 
 
 class Player:
@@ -121,19 +113,8 @@ def get_payout():
     return ''.join(output)
 
 
-card_template = [
-    r"╭─────────╮",
-    r"│ {value}       │",
-    r"│         │",
-    r"│    {suit}    │",
-    r"│         │",
-    r"│       {value} │",
-    r"╰─────────╯",
-]
-
-
 def get_cards(hand):
-    group = ['          '.join(bunch) for bunch in zip(*[cards.card_display[card] for card in hand])]
+    group = ['          '.join(bunch) for bunch in zip(*[layouts.cards[card] for card in hand])]
 
     fmt = '{:^' + str(TERMINAL_X) + '}'
 
@@ -145,8 +126,7 @@ def get_cards(hand):
 
 
 def get_buttons(hold):
-
-    group = ['      '.join(bunch) for bunch in zip(*[cards.buttons[x] for x in hold])]
+    group = ['      '.join(bunch) for bunch in zip(*[layouts.buttons[x] for x in hold])]
 
     fmt = '{:^' + str(TERMINAL_X) + '}'
 
@@ -156,11 +136,12 @@ def get_buttons(hold):
 
     return ''.join(output)
 
+
 def determine_payout(hand):
     pass
 
-def main():
 
+def main():
     # s = '╭' + '─'* (TERMINAL_X - 2) + '╮'
     # print(s)
     # for _ in range(10):
@@ -174,13 +155,14 @@ def main():
 
     hand = [deck.deal_one() for _ in range(5)]
 
-
     hold = ['hold', 'hold', 'hold', 'hold', 'hold']
 
     s_title = get_title()
     s_payout = get_payout()
     s_cards = get_cards(hand)
     s_buttons = get_buttons(hold)
+
+    clear()
 
     while True:
         s_buttons = get_buttons(hold)
