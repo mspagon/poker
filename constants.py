@@ -1,6 +1,3 @@
-SUIT = 0
-VALUE = 1
-
 JACK_INDEX = 10
 
 # Value and corresponding index in `value_arr`

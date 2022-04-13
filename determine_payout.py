@@ -43,10 +43,10 @@ def determine_payout(hand: List[Card], initial_bet: int) -> Tuple[str, int]:
     is_straight = any(
         [all(value_arr[i : i + 5]) for i in range(len(value_arr) - 4)]
     )
-    num_suits_in_hand = len({card[constants.SUIT] for card in hand})
-    num_values_in_hand = len({card[constants.VALUE] for card in hand})
+    num_suits_in_hand = len({card.suit for card in hand})
+    num_values_in_hand = len({card.value for card in hand})
     most_of_a_kind = max(
-        Counter([card[constants.VALUE] for card in hand]).values()
+        Counter([card.value for card in hand]).values()
     )
 
     hand_result = constants.LOSE
